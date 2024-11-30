@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join My Discord & Roblox Shop</title>
+    <title>Join My Discord & Become a Supplier</title>
     <style>
         /* General Styles */
         body {
@@ -13,6 +13,20 @@
             background: radial-gradient(circle, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 1));
             color: white;
             text-align: center;
+            overflow-x: hidden;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        /* Keyframe Animation for Opening */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         /* Header Styles */
@@ -25,11 +39,24 @@
         h1 {
             margin-top: 50px;
             font-size: 3rem;
+            animation: slideIn 1.5s ease-out;
         }
 
         h2 {
             font-size: 2rem;
             margin-top: 20px;
+        }
+
+        /* Keyframe Animation for Header */
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Shop Section Styles */
@@ -40,6 +67,18 @@
             border-radius: 15px;
             max-width: 1200px;
             box-shadow: 0px 5px 20px rgba(0, 255, 255, 0.5);
+            animation: zoomIn 1s ease-out;
+        }
+
+        @keyframes zoomIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .fruit-list {
@@ -54,14 +93,27 @@
         .fruit-list li {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
-            width: 150px;
-            padding: 15px;
+            width: 180px;
+            padding: 20px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 255, 255, 0.3);
+            animation: slideUp 0.5s ease-out forwards;
+        }
+
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .fruit-list li:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             box-shadow: 0px 0px 15px 5px rgba(0, 255, 255, 0.8);
         }
 
@@ -70,7 +122,7 @@
             height: 100px;
             object-fit: cover;
             border-radius: 8px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             transition: transform 0.2s ease;
         }
 
@@ -81,6 +133,7 @@
         .fruit-list li p {
             margin: 5px 0;
             font-size: 1.2rem;
+            color: #00f7ff;
         }
 
         .button {
@@ -215,9 +268,8 @@
                 <p>Shadow Fruit</p>
                 <p>10 Robux</p>
             </li>
-            <!-- Additional Legendary Fruits -->
             <li>
-                <img src="https://via.placeholder.com/100?text=T-Rex" alt="T-Rex Fruit">
+                <img src="https://via.placeholder.com/100?text=TRex" alt="T-Rex Fruit">
                 <p>T-Rex Fruit</p>
                 <p>10 Robux</p>
             </li>
@@ -226,4 +278,12 @@
                 <p>Mammoth Fruit</p>
                 <p>10 Robux</p>
             </li>
-           
+        </ul>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 NovaShop. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
