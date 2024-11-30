@@ -5,60 +5,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join My Discord & Roblox Shop</title>
     <style>
+        /* General Styles */
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: linear-gradient(90deg, red, black);
-            color: white;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 1));
+            color: white;
+            text-align: center;
         }
+
+        /* Header Styles */
+        h1, h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00f7ff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+        }
+
+        h1 {
+            margin-top: 50px;
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 20px;
+        }
+
+        /* Shop Section Styles */
         .shop {
-            margin: 20px auto;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 8px;
-            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            max-width: 1200px;
+            box-shadow: 0px 5px 20px rgba(0, 255, 255, 0.5);
         }
-        .shop h2 {
-            margin-top: 0;
-        }
+
         .fruit-list {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             list-style: none;
             padding: 0;
+            gap: 15px;
         }
+
         .fruit-list li {
-            margin: 10px;
-            padding: 10px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
+            border-radius: 15px;
             width: 150px;
-            text-align: center;
+            padding: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
+
+        .fruit-list li:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 15px 5px rgba(0, 255, 255, 0.8);
+        }
+
         .fruit-list li img {
             width: 100px;
             height: 100px;
             object-fit: cover;
             border-radius: 8px;
+            margin-bottom: 10px;
+            transition: transform 0.2s ease;
         }
+
+        .fruit-list li img:hover {
+            transform: scale(1.1);
+        }
+
+        .fruit-list li p {
+            margin: 5px 0;
+            font-size: 1.2rem;
+        }
+
         .button {
-            background-color: #7289da;
+            background-color: #00f7ff;
             color: white;
             padding: 15px 25px;
             text-decoration: none;
-            font-size: 20px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            font-size: 1.5rem;
+            border-radius: 30px;
+            margin-top: 30px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
+
         .button:hover {
-            background-color: #5b6eae;
+            background-color: #00c8c8;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 1);
+        }
+
+        /* Footer Styles */
+        footer {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1rem;
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Main Content -->
+    <div>
+        <h1>Join My Discord Server!</h1>
+        <a href="https://discord.gg/MHck2yswdE" class="button" target="_blank">Join Now</a>
+    </div>
+
     <!-- Roblox Mythic & Legendary Fruit Shop -->
     <div class="shop">
         <h2>Roblox Mythic & Legendary Fruit Shop</h2>
@@ -166,18 +226,10 @@
                 <p>Mammoth Fruit</p>
                 <p>10 Robux</p>
             </li>
-            <li>
-                <img src="https://via.placeholder.com/100?text=Snow" alt="Snow Fruit">
-                <p>Snow Fruit</p>
-                <p>10 Robux</p>
-            </li>
-        </ul>
-    </div>
-
-    <!-- Discord Invite Section -->
-    <div>
-        <h1>Join My Discord Server!</h1>
-        <a href="https://discord.gg/YOUR_INVITE_LINK" class="button" target="_blank">Join Now</a>
-    </div>
+           
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Roblox Fruit Shop | All Rights Reserved</p>
+    </footer>
 </body>
 </html>
