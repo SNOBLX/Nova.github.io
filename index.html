@@ -1,180 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Advanced Discord Webhook Sender</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: #2C2F33;
-      color: #FFFFFF;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-
-    .container {
-      width: 90%;
-      max-width: 600px;
-      background: #23272A;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #7289DA;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-size: 1em;
-      color: #B9BBBE;
-    }
-
-    input, textarea, select, button {
-      width: 100%;
-      margin-bottom: 15px;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      font-size: 1em;
-    }
-
-    input, textarea, select {
-      background: #2C2F33;
-      color: #FFFFFF;
-    }
-
-    button {
-      background: #7289DA;
-      color: #FFFFFF;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background: #5A6EBE;
-    }
-
-    .message {
-      text-align: center;
-      margin-top: 10px;
-      font-size: 0.9em;
-    }
-
-    .error {
-      color: #FF6B6B;
-    }
-
-    .success {
-      color: #43B581;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Me!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            font-family: 'Arial', sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 2s ease-in-out;
+        }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: slideIn 1.5s ease-in-out;
+        }
+        .button {
+            padding: 15px 30px;
+            background: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            animation: bounce 2s infinite;
+        }
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1), rgba(0,0,0,0));
+            animation: moveBackground 10s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+        @keyframes moveBackground {
+            from { transform: translate(-100%, -100%); }
+            to { transform: translate(100%, 100%); }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Advanced Discord Webhook Sender</h1>
-    <form id="webhookForm">
-      <label for="webhookUrl">Webhook URL</label>
-      <input type="url" id="webhookUrl" placeholder="Enter webhook URL" required>
-
-      <label for="username">Username (Optional)</label>
-      <input type="text" id="username" placeholder="Enter username">
-
-      <label for="avatarUrl">Avatar URL (Optional)</label>
-      <input type="url" id="avatarUrl" placeholder="Enter avatar URL">
-
-      <label for="message">Message</label>
-      <textarea id="message" rows="4" placeholder="Enter your message"></textarea>
-
-      <label for="embedTitle">Embed Title</label>
-      <input type="text" id="embedTitle" placeholder="Enter embed title">
-
-      <label for="embedDescription">Embed Description</label>
-      <textarea id="embedDescription" rows="4" placeholder="Enter embed description"></textarea>
-
-      <label for="embedColor">Embed Color (Hex)</label>
-      <input type="text" id="embedColor" placeholder="Enter embed color (e.g., #7289DA)" value="#7289DA">
-
-      <button type="button" id="addField">Add Embed Field</button>
-      <div id="fieldsContainer"></div>
-
-      <button type="submit">Send Message</button>
-    </form>
-    <div id="status" class="message"></div>
-  </div>
-
-  <script>
-    const form = document.getElementById('webhookForm');
-    const statusDiv = document.getElementById('status');
-    const fieldsContainer = document.getElementById('fieldsContainer');
-    const addFieldButton = document.getElementById('addField');
-    let fields = [];
-
-    // Add Embed Field
-    addFieldButton.addEventListener('click', () => {
-      const fieldName = prompt("Enter field name:");
-      const fieldValue = prompt("Enter field value:");
-      const fieldInline = confirm("Should this field be inline?");
-
-      if (fieldName && fieldValue) {
-        fields.push({ name: fieldName, value: fieldValue, inline: fieldInline });
-        const fieldDiv = document.createElement('div');
-        fieldDiv.textContent = `Field: ${fieldName} - ${fieldValue} (Inline: ${fieldInline})`;
-        fieldsContainer.appendChild(fieldDiv);
-      }
-    });
-
-    // Form Submission
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      statusDiv.textContent = '';
-
-      const webhookUrl = document.getElementById('webhookUrl').value;
-      const username = document.getElementById('username').value || undefined;
-      const avatarUrl = document.getElementById('avatarUrl').value || undefined;
-      const message = document.getElementById('message').value;
-      const embedTitle = document.getElementById('embedTitle').value || undefined;
-      const embedDescription = document.getElementById('embedDescription').value || undefined;
-      const embedColor = document.getElementById('embedColor').value;
-
-      const payload = {
-        username: username,
-        avatar_url: avatarUrl,
-        content: message,
-        embeds: embedTitle || embedDescription || fields.length > 0 ? [{
-          title: embedTitle,
-          description: embedDescription,
-          color: parseInt(embedColor.replace("#", ""), 16),
-          fields: fields
-        }] : []
-      };
-
-      try {
-        const response = await fetch(webhookUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        if (response.ok) {
-          statusDiv.textContent = "Message sent successfully!";
-          statusDiv.className = "message success";
-        } else {
-          throw new Error('Failed to send message');
-        }
-      } catch (error) {
-        statusDiv.textContent = "Error sending message!";
-        statusDiv.className = "message error";
-      }
-    });
-  </script>
+    <div>
+        <h1>Are You Ready?</h1>
+        <p>Click the button below to reveal something exciting!</p>
+        <a href="https://youtu.be/H8ZH_mkfPUY?si=YBSFwXIp33B2uWeC" class="button">Click Me!</a>
+    </div>
+    <div class="bg-animation"></div>
 </body>
 </html>
