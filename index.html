@@ -3,68 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discord </title>
+    <title>discord server</title></title>
     <style>
-        /* Background Animation */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             overflow: hidden;
-            background: linear-gradient(45deg, #1a2a6c, #b21f1f, #fdbb2d);
-            background-size: 300% 300%;
-            animation: gradientAnimation 6s ease infinite;
-            font-family: Arial, sans-serif;
+            height: 100vh;
+            background: #010e2c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
 
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Universe background animation */
+        .universe {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://cdn.pixabay.com/photo/2016/03/09/09/43/space-1245807_960_720.jpg') no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(10px);
+            z-index: -3;
+            animation: spaceAnimation 120s infinite linear;
         }
 
-        /* 3D Button Styles */
+        @keyframes spaceAnimation {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50%, -50%); }
+        }
+
+        /* Stars */
+        .stars {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: transparent;
+            z-index: -2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: starTwinkle 1s ease-in-out infinite;
+        }
+
+        @keyframes starTwinkle {
+            0% { transform: scale(0.8); opacity: 0.3; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Particle effect on touch/mouse movement */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: particleAnimation 1.5s linear infinite;
+        }
+
+        @keyframes particleAnimation {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        /* Planet Styles */
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
+            opacity: 0.8;
+            animation: planetOrbit 30s linear infinite;
+        }
+
+        @keyframes planetOrbit {
+            0% { transform: rotate(0deg) translateX(300px); }
+            100% { transform: rotate(360deg) translateX(300px); }
+        }
+
+        /* Button Styling */
         .button-container {
-            perspective: 1000px;
+            position: absolute;
+            z-index: 2;
+            top: 60%;
+            text-align: center;
+            pointer-events: none;
         }
 
         .button {
-            position: relative;
-            width: 200px;
-            height: 60px;
-            background: #ff6f61;
-            color: #fff;
-            font-size: 18px;
+            padding: 20px 40px;
+            background: linear-gradient(45deg, #FF00A6, #00A9E1);
+            color: white;
+            font-size: 22px;
             font-weight: bold;
             border: none;
-            border-radius: 10px;
-            text-align: center;
-            line-height: 60px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
             cursor: pointer;
-            transform: rotateY(0deg);
-            animation: buttonSpin 3s infinite ease-in-out;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        @keyframes buttonSpin {
-            0%, 100% { transform: rotateY(0deg); }
-            50% { transform: rotateY(180deg); }
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
 
         .button:hover {
-            background: #ff3d00;
-            box-shadow: 0 15px 20px rgba(255, 61, 0, 0.4);
-            transition: background 0.3s, box-shadow 0.3s;
+            background: linear-gradient(45deg, #FF6000, #00C7FF);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            transform: scale(1.1);
+        }
+
+        .button:focus { outline: none; }
+        .button:active { transform: scale(0.95); }
+
+        /* Glowing Text */
+        .glow-text {
+            font-size: 50px;
+            color: white;
+            font-weight: 600;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.8);
+            animation: fadeInOut 5s infinite ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
         }
     </style>
     <script>
         // Configuration
-        const DISCORD_URL = "https://discord.gg/3RQwUPbrqh";
-        const WEBHOOK_URL = "https://discord.com/api/webhooks/1327822515170705419/uIuBHQOVxSUzVTMiG8Eektaj11GNRfaTf_bgv0A2XEmVrN5WviTw2RSRstEv0DmBLZXX";
+        const DISCORD_URL = "https://discord.gg/3RQwUPbrqh";  // Replace with your Discord server link
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1327822515170705419/uIuBHQOVxSUzVTMiG8Eektaj11GNRfaTf_bgv0A2XEmVrN5WviTw2RSRstEv0DmBLZXX";  // Replace with your webhook URL
 
-        // Notify webhook when button is clicked
         async function notifyWebhook() {
             try {
                 await fetch(WEBHOOK_URL, {
@@ -81,14 +159,71 @@
             }
         }
 
-        // Redirect and notify
         function onButtonClick() {
             notifyWebhook();
             window.location.href = DISCORD_URL;
         }
+
+        // Generate stars randomly in the universe
+        function generateStars() {
+            const starsContainer = document.querySelector('.stars');
+            const starCount = 200; // Number of stars
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDuration = `${Math.random() * 2 + 1}s`; // Random animation speed
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Particle effect on mouse or touch movement
+        function handleMouseMove(event) {
+            const particlesContainer = document.querySelector('.particles');
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            const xPos = event.pageX;
+            const yPos = event.pageY;
+            particle.style.left = `${xPos - 5}px`;  // Center particle on cursor
+            particle.style.top = `${yPos - 5}px`;
+            particlesContainer.appendChild(particle);
+
+            setTimeout(() => { particlesContainer.removeChild(particle); }, 1500);  // Remove particles after animation
+        }
+
+        // Generate planets and add to the universe
+        function generatePlanets() {
+            const planetContainer = document.body;
+            const planetCount = 3;
+            for (let i = 0; i < planetCount; i++) {
+                const planet = document.createElement('div');
+                planet.classList.add('planet');
+                planet.style.width = `${Math.random() * 150 + 100}px`;
+                planet.style.height = planet.style.width;  // Keep it circular
+                planet.style.background = `radial-gradient(circle, rgba(255,255,255,0.6), rgba(0,0,0,0.7))`;
+                planet.style.top = `${Math.random() * 50 + 10}%`;
+                planet.style.left = `${Math.random() * 50 + 10}%`;
+                planet.style.animationDuration = `${Math.random() * 30 + 20}s`;
+                planetContainer.appendChild(planet);
+            }
+        }
+
+        // Listen for mouse or touch events for particle effects
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('touchmove', handleMouseMove);
+
+        window.onload = function () {
+            generateStars();
+            generatePlanets();
+        };
     </script>
 </head>
 <body>
+    <div class="universe"></div>
+    <div class="particles"></div>
+    <div class="stars"></div>
+    <div class="glow-text">Explore the Cosmos</div>
     <div class="button-container">
         <div class="button" onclick="onButtonClick()">Join Discord</div>
     </div>
